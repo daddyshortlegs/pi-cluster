@@ -1,0 +1,16 @@
+- name: Pi playbook
+  hosts: workers
+  tasks:
+
+   - name: Ping hosts
+     ansible.builtin.ping: 
+
+   - name: Install cowsay
+     ansible.builtin.apt:
+       name: cowsay
+     become: true
+
+   - name: cowsay moo
+     command: cowsay moo
+
+

@@ -116,5 +116,9 @@ To shutdown the workers nodes (as root):
 ansible workers -a “shutdown now” -K –become
 ```
 
+Running the playbook as root:
 
+```
+ansible-playbook playbook.yaml -K
+```
 
