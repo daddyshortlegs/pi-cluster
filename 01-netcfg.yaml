@@ -1,0 +1,14 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: no
+      addresses:
+        -{{ ansible_default_ipv4.address }} 
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
+      routes:
+        - to: default
+          via: 10.0.0.1
+

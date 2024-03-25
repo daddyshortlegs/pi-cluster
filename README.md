@@ -61,6 +61,21 @@ To setup NAT on the master do:
 sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
 ```
 
+To make the NAT changes permanent save the iptables:
+
+```
+sudo apt update
+sudo apt install iptables-persistent
+```
+
+If you make changes to iptables afterwards, you will need to save again as installing the package above will save
+the current iptables.
+
+```
+sudo iptables-save > /etc/iptables/rules.v4
+```
+
+
 SSH
 
 To make logging into nodes easier, generate a key, then copy it to each node:
@@ -107,7 +122,7 @@ ansible all -m ping -u andy –ask-pass
 To run command as root across all nodes:
 
 ```
-ansible all -a “touch /etc/blah” –ask-pass -K –become
+ansible all -a “touch /etc/blah” -–ask-pass -K –become
 ```
 
 To shutdown the workers nodes (as root):
