@@ -75,8 +75,21 @@ the current iptables.
 sudo iptables-save > /etc/iptables/rules.v4
 ```
 
+### DHCP
 
-SSH
+Install kea to get an official DHCP server. Configuration lives in /etc/kea. You can test it with:
+
+```
+sudo dhclient -v eth0
+```
+Kea can be started and stopped as follows:
+
+```
+sudo keactrl start/stop
+```
+
+
+### SSH
 
 To make logging into nodes easier, generate a key, then copy it to each node:
 
