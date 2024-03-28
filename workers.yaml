@@ -1,0 +1,8 @@
+- name: Pi playbook
+  hosts: workers
+  tasks:
+   - name: Copy netplan 
+     template: src=01-netcfg.yaml dest=/etc/netplan
+     become: true
+
+

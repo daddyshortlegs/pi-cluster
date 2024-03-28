@@ -1,18 +1,6 @@
-- name: Pi playbook
-  hosts: workers
+- name: Setup master node
+  hosts: master
   tasks:
-
-   - name: Ping hosts
-     ansible.builtin.ping: 
-
-   - name: Install cowsay
-     ansible.builtin.apt:
-       name: cowsay
-     become: true
-
-   - name: Copy netplan 
-     template: src=01-netcfg.yaml dest=/home/andy
-
    - name: Enable port forwarding
      sysctl:
        name: net.ipv4.ip_forward
@@ -21,6 +9,8 @@
        sysctl_set: yes
      notify: restart networking
 
+   - name: Ping hosts
+     ansible.builtin.ping: 
   handlers:
     - name: restart networking
       service:
