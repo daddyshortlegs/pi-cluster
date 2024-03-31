@@ -2,6 +2,10 @@
   hosts: all
   tasks:
 
+   - name: Enable c-groups
+     template: src=templates/boot/firmware/cmdline.txt dest=/boot/firmware/cmdline.txt
+     become: true
+
    - name: Install microk8s
      community.general.snap:
        name:
@@ -9,4 +13,16 @@
        classic: true
      become: true
 
+   - name: Add user to microk8s group
+     ansible.builtin.user:
+       name: andy
+       groups: microk8s
+       append: yes
+     become: true
+  
+   - ansible.builtin.file:
+       name: andy
+       path: /home/andy/.kube
+       state: directory
+       recurse: yes
 

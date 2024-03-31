@@ -2,7 +2,7 @@
   hosts: workers
   tasks:
    - name: Copy netplan 
-     template: src=01-netcfg.yaml dest=/etc/netplan
+     template: src=templates/etc/netplan/01-netcfg.yaml dest=/etc/netplan
      become: true
 
 
