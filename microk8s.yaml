@@ -20,14 +20,14 @@
 
    - name: Add user to microk8s group
      ansible.builtin.user:
-       name: andy
+       name: pi
        groups: microk8s
        append: yes
      become: true
   
    - ansible.builtin.file:
-       name: andy
-       path: /home/andy/.kube
+       name: pi
+       path: /home/pi/.kube
        state: directory
        recurse: yes
 

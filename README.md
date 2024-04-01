@@ -106,7 +106,7 @@ ssh-keygen -t rsa -b 4096
 That will create an id_rsa (private and public) in .ssh. Then copy it to each node:
 
 ```
-ssh-copy-id andy@10.0.0.x
+ssh-copy-id pi@10.0.0.x
 ```
 
 Then ssh to the nodes and you won’t need a password
@@ -135,7 +135,7 @@ pi4 ansible_host=10.0.0.4
 Testing access
 
 ```
-ansible all -m ping -u andy –ask-pass
+ansible all -m ping -u pi –ask-pass
 ```
 
 To run command as root across all nodes:
