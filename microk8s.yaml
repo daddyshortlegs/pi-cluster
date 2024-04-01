@@ -1,6 +1,12 @@
 - name: Pi playbook
   hosts: all
   tasks:
+   - name: Set authorised key of pi1
+     ansible.posix.authorized_key:
+       user: pi
+       state: present
+       key: "{{ lookup('file', '/home/andy/.ssh/id_rsa.pub') }}"
+
    - name: Install avahi
      ansible.builtin.apt:
        name: avahi-daemon
