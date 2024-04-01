@@ -1,6 +1,11 @@
 - name: Pi playbook
   hosts: all
   tasks:
+   - name: Install avahi
+     ansible.builtin.apt:
+       name: avahi-daemon
+       update_cache: yes
+     become: true
 
    - name: Enable c-groups
      template: src=templates/boot/firmware/cmdline.txt dest=/boot/firmware/cmdline.txt
@@ -25,4 +30,5 @@
        path: /home/andy/.kube
        state: directory
        recurse: yes
+
 

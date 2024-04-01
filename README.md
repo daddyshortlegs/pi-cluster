@@ -88,6 +88,12 @@ Kea can be started and stopped as follows:
 sudo keactrl start/stop
 ```
 
+### Multicast DNS
+
+To simplify logging onto Pis without remembering IP addresses install `avahi-daemon`. Then you can login
+with the hostname:
+
+`ssh user@pi2.local`
 
 ### SSH
 
