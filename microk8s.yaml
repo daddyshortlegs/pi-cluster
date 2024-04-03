@@ -5,7 +5,7 @@
      ansible.posix.authorized_key:
        user: pi
        state: present
-       key: "{{ lookup('file', '/home/andy/.ssh/id_rsa.pub') }}"
+       key: "{{ lookup('file', '/home/pi/.ssh/id_rsa.pub') }}"
 
    - name: Install avahi
      ansible.builtin.apt:

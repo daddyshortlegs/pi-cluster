@@ -1,5 +1,5 @@
 - name: Setup master node
-  hosts: master
+  hosts: localhost
   tasks:
    - name: Enable port forwarding
      sysctl:
@@ -7,10 +7,9 @@
        value: 1
        state: present
        sysctl_set: yes
+     become: true
      notify: restart networking
 
-   - name: Ping hosts
-     ansible.builtin.ping: 
   handlers:
     - name: restart networking
       service:
