@@ -1,8 +1,14 @@
 - name: Setup master node
-  hosts: master
+  hosts: localhost
   tasks:
-   - name: Copy netplan 
-     template: src=templates/etc/netplan/01-netcfg-master.yaml dest=/etc/netplan
+   - name: Copy netplan configuration
+     ansible.builtin.copy:
+       src: templates/etc/netplan/01-netcfg-master.yaml
+       dest: /etc/netplan
+     become: true
+
+   - ansible.builtin.command:
+       cmd: netplan apply
      become: true
 
    - name: Enable port forwarding
@@ -11,15 +17,40 @@
        value: 1
        state: present
        sysctl_set: yes
+     become: true
      notify: restart networking
 
-   - name: Ping hosts
-     ansible.builtin.ping: 
+   - name: Set up NAT
+     ansible.builtin.iptables:
+       table: nat
+       chain: POSTROUTING
+       out_interface: wlan0
+       jump: MASQUERADE
+     become: true
+
+   - name: Install more stuff
+     ansible.builtin.apt:
+       pkg:
+        - iptables-persistent
+        - kea
+     become: true
+
+   - name: Copy Kea DHCP configuration
+     ansible.builtin.copy:
+       src: templates/etc/kea/kea-dhcp4.conf
+       dest: /etc/kea
+     become: true
+     notify: restart kea
+
   handlers:
     - name: restart networking
       service:
         name: networking
         state: restarted
 
+    - name: restart kea
+      service:
+        name: kea-dhcp4-server
+        state: restarted
 
 
