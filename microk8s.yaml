@@ -36,5 +36,6 @@
        path: /home/pi/.kube
        state: directory
        recurse: yes
+     become: true
 
 

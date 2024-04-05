@@ -33,6 +33,7 @@
        pkg:
         - iptables-persistent
         - kea
+        - jq
      become: true
 
    - name: Copy Kea DHCP configuration

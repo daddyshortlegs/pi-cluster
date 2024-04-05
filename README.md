@@ -39,6 +39,15 @@ ens3:
 
 Then do `sudo netplan apply` on each node
 
+To permanently set a hostname do:
+
+```
+sudo hostnamectl set-hostname pi4
+```
+
+this is needed for microk8s to join a node successfully and display with `microk8s.kubectl get nodes`.
+
+
 Routing
 
 Temporarily route to wifi router:
