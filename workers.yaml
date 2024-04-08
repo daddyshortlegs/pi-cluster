@@ -1,8 +1,14 @@
 - name: Pi playbook
-  hosts: workers
+  hosts: cluster
   tasks:
-   - name: Copy netplan 
-     template: src=templates/etc/netplan/01-netcfg.yaml dest=/etc/netplan
-     become: true
+    - name: Update hostnames
+      hostname:
+        name: "{{ new_hostname }}"
+      become: true
+
+    - name: Install avahi
+      ansible.builtin.apt:
+        name: avahi-daemon
+      become: true
 
 

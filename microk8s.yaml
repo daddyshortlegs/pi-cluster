@@ -10,7 +10,7 @@
    - name: Install avahi
      ansible.builtin.apt:
        name: avahi-daemon
-       update_cache: yes
+       update-cache: yes
      become: true
 
    - name: Enable c-groups
