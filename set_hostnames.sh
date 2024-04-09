@@ -1,4 +1,5 @@
 #!/bin/bash
 
-ansible-playbook -i inventory/pis.yaml  workers.yaml  -K --ask-pass
+export ANSIBLE_HOST_KEY_CHECKING=False
+ansible-playbook -i inventory/pis.yaml  workers.yaml -K --ask-pass
 

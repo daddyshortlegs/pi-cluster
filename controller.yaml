@@ -48,6 +48,7 @@
       service:
         name: networking
         state: restarted
+      become: true
 
     - name: restart kea
       service:
