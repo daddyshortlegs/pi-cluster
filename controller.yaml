@@ -1,6 +1,10 @@
 - name: Setup master node
   hosts: localhost
   tasks:
+   - name: Generating OpenSSH keypair
+     openssh_keypair:
+       path: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+
    - name: Copy netplan configuration
      ansible.builtin.copy:
        src: templates/etc/netplan/01-netcfg-master.yaml

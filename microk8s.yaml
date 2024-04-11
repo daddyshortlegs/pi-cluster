@@ -7,6 +7,11 @@
        state: present
        key: "{{ lookup('file', '/home/pi/.ssh/id_rsa.pub') }}"
 
+   - name: Update hostnames
+     hostname:
+       name: "{{ new_hostname }}"
+     become: true
+
    - name: Install avahi
      ansible.builtin.apt:
        name: avahi-daemon
