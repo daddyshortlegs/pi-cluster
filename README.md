@@ -19,23 +19,42 @@ sudo ip link set dev eth0 up
 
 Netplan is the tool on Ubuntu to setup your network (permanently)
 
-Create a netplan file on each node (in /etc/netplan):
+Create a netplan file for your controller (and internet gateway) now (in /etc/netplan):
 
 ```
 network:
   version: 2
   renderer: networkd
-  Ethernets:
-ens3:
-  dhcp4: no
-  addresses:
-  - 10.0.0.2/24  (the IP address you want)
-  nameservers:
-    addresses: [8.8.8.8, 1.1.1.1]
-  routes:
-    To: default
-    via: 10.0.0.1
+  ethernets:
+    ens3:
+      dhcp4: no
+      addresses:
+      - 10.0.0.1/24  (the IP address you want)
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
 ```
+
+Create a netplan file on each worker node (in /etc/netplan):
+
+```
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens3:
+      dhcp4: no
+      addresses:
+      - 10.0.0.2/24  (the IP address you want)
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
+      routes:
+      - to: default
+        via: 10.0.0.1
+```
+
+This will route outgoing traffic to your gateway 10.0.0.1. This is your controller node that has outside access
+to the internet (via wifi in our case).
+
 
 Then do `sudo netplan apply` on each node
 
