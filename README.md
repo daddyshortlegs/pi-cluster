@@ -56,7 +56,10 @@ This will route outgoing traffic to your gateway 10.0.0.1. This is your controll
 to the internet (via wifi in our case).
 
 
-Then do `sudo netplan apply` on each node
+Then do `sudo netplan apply` on each node.
+
+N.B. Ubuntu Desktop will use Network Manager and you will get conflicts with networkd (as the renderer).
+You should use Ubuntu Server.
 
 To permanently set a hostname do:
 
@@ -169,13 +172,13 @@ pi4 ansible_host=10.0.0.4
 Testing access
 
 ```
-ansible all -m ping -u pi –ask-pass
+ansible all -m ping -u pi --ask-pass
 ```
 
 To run command as root across all nodes:
 
 ```
-ansible all -a “touch /etc/blah” -–ask-pass -K –become
+ansible all -a “touch /etc/blah” --ask-pass -K –become
 ```
 
 To shutdown the workers nodes (as root):
