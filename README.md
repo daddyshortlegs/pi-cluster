@@ -193,9 +193,6 @@ Running the playbook as root:
 ansible-playbook playbook.yaml -K
 ```
 
-
-
-
 # On master node
 
 setup port forwarding
